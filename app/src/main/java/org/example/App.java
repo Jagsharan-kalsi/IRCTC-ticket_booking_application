@@ -3,6 +3,41 @@
  */
 package org.example;
 
+
+import org.example.services.UserBookingService;
+
+import java.io.IOException;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Scanner;
+import java.util.stream.Collectors;
+
 public class App {
+    public static void main(String[] args) {
+        System.out.println("IRCTC : Running Train ticket booking system");
+        Scanner sc = new Scanner(System.in);
+        int option = 0;
+        UserBookingService userbookingservice;
+        try {
+            userbookingservice = new UserBookingService();
+        }catch (IOException ex) {
+            System.out.println(" There is something Wrong !!!");
+            return;
+        }
+
+        while (option !=7 ) {
+            System.out.println("-- CHOOSE OPTION --");
+            System.out.println("1. Signup");
+            System.out.println("2. Login");
+            System.out.println("3. Fetch Bookings");
+            System.out.println("4. Search Trains");
+            System.out.println("5. Book a seat");
+            System.out.println("6. Cancel my Booking");
+            System.out.println("7. Exit application");
+            option = sc.nextInt();
+            
+        }
+
+    }
 
 }
