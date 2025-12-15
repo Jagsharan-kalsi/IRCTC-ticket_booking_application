@@ -1,73 +1,97 @@
 package org.example.entities;
 
-import java.util.Date;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.databind.PropertyNamingStrategies;
+import com.fasterxml.jackson.databind.PropertyNamingStrategy;
+import com.fasterxml.jackson.databind.annotation.JsonNaming;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
-public class Ticket {
-    private String ticketID;
+import java.sql.Date;
+
+@JsonIgnoreProperties(ignoreUnknown = true)
+@JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
+public class Ticket{
+
+    private String ticketId;
+
     private String userId;
+
     private String source;
+
     private String destination;
-    private Date dateOfTravel;
+
+    private String dateOfTravel;
+
     private Train train;
 
-    public Ticket(String ticketID , String userId , String source, String destination , Date dateOfTravel , Train train) {
-        this.ticketID = ticketID;
+    public Ticket(){}
+
+    public Ticket(String ticketId, String userId, String source, String destination, String dateOfTravel, Train train){
+        this.ticketId = ticketId;
         this.userId = userId;
         this.source = source;
         this.destination = destination;
-        this.dateOfTravel= dateOfTravel;
+        this.dateOfTravel = dateOfTravel;
         this.train = train;
     }
 
-    public String getTicketInfo() {
-        return String.format("Ticket ID: %s belongs to User %s from %s to %s on %s",ticketID,userId,source,destination,train);
+    public String getTicketInfo(){
+        return String.format("Ticket ID: %s belongs to User %s from %s to %s on %s", ticketId, userId, source, destination, dateOfTravel);
     }
 
-    public String getTicketID() {
-        return ticketID;
+    public String getTicketId(){
+        return ticketId;
     }
 
-    public void setTicketID(String ticketID) {
-        this.ticketID = ticketID;
+    public void setTicketId(String ticketId){
+        this.ticketId = ticketId;
     }
 
-    public String getUserId() {
-        return userId;
-    }
-
-    public void setUserId(String userId) {
-        this.userId = userId;
-    }
-
-    public String getSource() {
+    public String getSource(){
         return source;
     }
 
-    public void setSource(String source) {
+    public void setSource(String source){
         this.source = source;
     }
 
-    public String getDestination() {
+    public String getUserId(){
+        return userId;
+    }
+
+    public void setUserId(String userId){
+        this.userId = userId;
+    }
+
+    public String getDestination(){
         return destination;
     }
 
-    public void setDestination(String destination) {
+    public void setDestination(String destination){
         this.destination = destination;
     }
 
-    public Date getDateOfTravel() {
+    public String getDateOfTravel(){
         return dateOfTravel;
     }
 
-    public void setDateOfTravel(Date dateOfTravel) {
+    public void setDateOfTravel(String dateOfTravel){
         this.dateOfTravel = dateOfTravel;
     }
 
-    public Train getTrain() {
+    public Train getTrain(){
         return train;
     }
 
-    public void setTrain(Train train) {
+    public void setTrain(Train train){
         this.train = train;
     }
+
 }

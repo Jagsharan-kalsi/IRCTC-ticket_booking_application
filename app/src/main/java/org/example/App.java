@@ -17,6 +17,9 @@ import java.util.Scanner;
 import java.util.UUID;
 
 public class App {
+    public String getGreeting() {
+        return "Hello IRCTC!";
+    }
     public static void main(String[] args) {
         System.out.println("IRCTC : Running Train ticket booking system");
         Scanner sc = new Scanner(System.in);
@@ -26,6 +29,7 @@ public class App {
             userbookingservice = new UserBookingService();
         }catch (IOException ex) {
             System.out.println(" There is something Wrong !!!");
+            ex.printStackTrace();
             return;
         }
 

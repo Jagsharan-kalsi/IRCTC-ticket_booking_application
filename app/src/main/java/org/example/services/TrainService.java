@@ -1,9 +1,10 @@
 package org.example.services;
 
-import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.PropertyNamingStrategies;
+import com.fasterxml.jackson.core.type.TypeReference;
 import org.example.entities.Train;
-
 
 import java.io.File;
 import java.io.IOException;
@@ -16,10 +17,14 @@ import java.util.stream.IntStream;
 public class TrainService {
 
     private List<Train> trainList;
-    private ObjectMapper objectMapper = new ObjectMapper();
-    private static final String TRAIN_DB_PATH = "app/src/main/java/org/example/localDb/trains.json";
+    private ObjectMapper objectMapper;
+    private static final String TRAIN_DB_PATH = "/Users/apple/Desktop/IRCTC/app/src/main/java/org/example/localDb/trains.json";
 
     public TrainService() throws IOException {
+        objectMapper = new ObjectMapper()
+                .setPropertyNamingStrategy(PropertyNamingStrategies.SNAKE_CASE) // handle snake_case JSON
+                .configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false); // ignore extra JSON fields
+
         File trains = new File(TRAIN_DB_PATH);
         trainList = objectMapper.readValue(trains, new TypeReference<List<Train>>() {});
     }

@@ -22,7 +22,7 @@ public class UserBookingService {
 
     private static final ObjectMapper objectMapper = new ObjectMapper();
 
-    private static final String USERS_PATH = "app/src/main/java/ticket/booking/localDb/users.json";
+    private static final String USERS_PATH = "/Users/apple/Desktop/IRCTC/app/src/main/java/org/example/localDb/users.json";
 
     //deserialization of JSON object to Java object for reading users and adding it to userList //
     public UserBookingService(User user1) throws IOException {
@@ -36,8 +36,10 @@ public class UserBookingService {
 
     public List<User> loadUsers () throws IOException {
         File users = new File(USERS_PATH);
-        return objectMapper.readValue(users, new TypeReference<List<User>>() {});
+        userList = objectMapper.readValue(users, new TypeReference<List<User>>() {});
+        return userList;
     }
+
 
     // takes user globally and matches with every user in userList (name and password) if match found is present returns true otherwise false //
     public boolean loginUser() {
@@ -80,10 +82,10 @@ public class UserBookingService {
         }
 
         String finalTicketId1 = ticketId;  //Because strings are immutable
-        boolean removed = user.getTicketsBooked().removeIf(ticket -> ticket.getTicketID().equals(finalTicketId1));
+        boolean removed = user.getTicketsBooked().removeIf(ticket -> ticket.getTicketId().equals(finalTicketId1));
 
         String finalTicketId = ticketId;
-        user.getTicketsBooked().removeIf(Ticket -> Ticket.getTicketID().equals(finalTicketId));
+        user.getTicketsBooked().removeIf(Ticket -> Ticket.getTicketId().equals(finalTicketId));
         if (removed) {
             System.out.println("Ticket with ID " + ticketId + " has been canceled.");
             return Boolean.TRUE;
